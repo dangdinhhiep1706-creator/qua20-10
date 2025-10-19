@@ -1,23 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Quà 20/10 của Đình Hiệp 💝</title>
+<title>Quà 20/10 của Đình Hiệp</title>
 <style>
   body {
     font-family: 'Comic Sans MS', cursive;
     background-color: #ffe4ec;
     text-align: center;
     padding-top: 100px;
-    overflow: hidden;
   }
   h1 {
     color: #d63384;
   }
   #buttons {
     margin-top: 30px;
-    position: relative;
   }
   button {
     font-size: 20px;
@@ -42,15 +39,6 @@
     color: #d63384;
     font-weight: bold;
   }
-  /* Hiệu ứng rung nút */
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-  .shake {
-    animation: shake 0.3s;
-  }
 </style>
 </head>
 <body>
@@ -63,55 +51,20 @@
 
 <div id="message"></div>
 
-<!-- Nhạc nền -->
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/21/audio_6c412d7763.mp3?filename=happy-day-143718.mp3" type="audio/mpeg">
-</audio>
-
-<!-- Âm thanh khi rê chuột -->
-<audio id="hoverSound">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5e2580cf56.mp3?filename=pop-94319.mp3" type="audio/mpeg">
-</audio>
-
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
-  const hoverSound = document.getElementById('hoverSound');
-  const bgMusic = document.getElementById('bgMusic');
 
-  // Phát nhạc nền khi click trang (do trình duyệt chặn tự động)
-  document.body.addEventListener('click', () => {
-    bgMusic.play();
-  }, { once: true });
-
-  // Vị trí ban đầu nút "Có"
-  yesBtn.style.left = "45%";
-  yesBtn.style.top = "0px";
-
-  // Khi rê chuột vào nút "Có" -> phát âm thanh + chạy chỗ khác
+  // Khi rê chuột vào nút "Có", nó chạy chỗ khác
   yesBtn.addEventListener('mouseover', () => {
-    hoverSound.currentTime = 0;
-    hoverSound.play();
-
-    const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    yesBtn.style.left = `${x}px`;
-    yesBtn.style.top = `${y}px`;
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    yesBtn.style.left = x + 'px';
+    yesBtn.style.top = y + 'px';
   });
 
-  // Khi rê chuột vào nút "Không" -> phát âm thanh + rung
-  noBtn.addEventListener('mouseover', () => {
-    hoverSound.currentTime = 0;
-    hoverSound.play();
-    noBtn.classList.add('shake');
-    setTimeout(() => noBtn.classList.remove('shake'), 300);
-  });
-
-  // Khi bấm "Không" -> hiện lời chúc
+  // Khi bấm nút "Không"
   noBtn.addEventListener('click', () => {
     message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
     document.getElementById('buttons').style.display = 'none';

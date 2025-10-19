@@ -36,12 +36,13 @@ qua20_10.html
 
   #buttons {
     position: relative;
+    display: flex;
+    gap: 40px;
   }
 
   button {
     font-size: 20px;
     padding: 12px 30px;
-    margin: 20px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -52,12 +53,15 @@ qua20_10.html
     background-color: #ff66b2;
     color: white;
     position: absolute;
+    left: 0;
+    top: 0;
   }
 
   #no {
     background-color: #ffcccb;
     color: #880e4f;
     font-weight: bold;
+    position: relative;
   }
 
   #message {
@@ -101,6 +105,11 @@ qua20_10.html
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
+  const buttons = document.getElementById('buttons');
+
+  // Đặt vị trí ban đầu cho nút Có
+  yesBtn.style.left = "50px";
+  yesBtn.style.top = "0px";
 
   // Khi rê chuột vào nút "Có", nó chạy chỗ khác
   yesBtn.addEventListener('mouseover', () => {
@@ -112,8 +121,8 @@ qua20_10.html
 
   // Khi bấm nút "Không"
   noBtn.addEventListener('click', () => {
-    document.getElementById('buttons').style.display = 'none';
-    message.innerHTML = "💐 Chúc bạn 20/10 vui vẻ, luôn rạng rỡ, hạnh phúc và không bao giờ hết quà nhé! 💖";
+    buttons.style.display = 'none';
+    message.innerHTML = "💐 Chúc bạn 20/10 vui vẻ, luôn xinh đẹp, hạnh phúc và được tặng thật nhiều quà nhé! 💖";
 
     // Hiệu ứng tim bay
     for (let i = 0; i < 30; i++) {
@@ -143,3 +152,5 @@ qua20_10.html
 
 </body>
 </html>
+
+

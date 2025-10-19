@@ -1,99 +1,62 @@
-qua20_10.html
+Quà 20-10 của Đặng Đình Hiệp
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Quà 20/10 bất ngờ 💖</title>
+<title>Quà 20/10 💐</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
   body {
-    height: 100vh;
-    background: linear-gradient(135deg, #ffd6e8, #ffe5ec, #fff0f5);
     font-family: 'Comic Sans MS', cursive;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4ec);
+    text-align: center;
+    padding-top: 100px;
     overflow: hidden;
   }
-
   h1 {
     color: #d63384;
-    font-size: 2em;
-    margin-bottom: 50px;
-    animation: shake 2s infinite;
+    font-size: 30px;
+    animation: bounce 1.5s infinite;
   }
-
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(2deg); }
-    75% { transform: rotate(-2deg); }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
-
   #buttons {
+    margin-top: 40px;
     position: relative;
-    display: flex;
-    gap: 40px;
   }
-
   button {
     font-size: 20px;
-    padding: 12px 30px;
+    padding: 12px 24px;
+    margin: 15px;
     border: none;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
   }
-
   #yes {
     background-color: #ff66b2;
     color: white;
     position: absolute;
-    left: 0;
-    top: 0;
   }
-
   #no {
-    background-color: #ffcccb;
-    color: #880e4f;
-    font-weight: bold;
-    position: relative;
+    background-color: #ffd1dc;
+    color: #d63384;
   }
-
+  button:hover {
+    transform: scale(1.1);
+  }
   #message {
-    margin-top: 40px;
+    margin-top: 50px;
     font-size: 24px;
     color: #d63384;
     font-weight: bold;
-    animation: appear 1s ease-in-out;
-  }
-
-  @keyframes appear {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  /* Tim bay */
-  .heart {
-    position: fixed;
-    color: #ff69b4;
-    font-size: 20px;
-    animation: floatUp 3s linear forwards;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-600px) scale(2); opacity: 0; }
   }
 </style>
 </head>
 <body>
 
-<h1>🎁 Bạn có muốn nhận quà 20/10 không? 💝</h1>
+<h1>Bạn có muốn nhận quà 20/10 không? 💝</h1>
 <div id="buttons">
   <button id="yes">Có 💕</button>
   <button id="no">Không 😆</button>
@@ -105,52 +68,28 @@ qua20_10.html
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
-  const buttons = document.getElementById('buttons');
 
-  // Đặt vị trí ban đầu cho nút Có
-  yesBtn.style.left = "50px";
+  // Vị trí ban đầu của nút "Có"
+  yesBtn.style.left = "45%";
   yesBtn.style.top = "0px";
 
-  // Khi rê chuột vào nút "Có", nó chạy chỗ khác
+  // Khi rê chuột vào nút "Có" -> nhảy chỗ khác
   yesBtn.addEventListener('mouseover', () => {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 100);
-    yesBtn.style.left = x + 'px';
-    yesBtn.style.top = y + 'px';
+    const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight - 100);
+    yesBtn.style.left = `${x}px`;
+    yesBtn.style.top = `${y}px`;
   });
 
-  // Khi bấm nút "Không"
+  // Khi bấm nút "Không" -> hiện lời chúc
   noBtn.addEventListener('click', () => {
-    buttons.style.display = 'none';
-    message.innerHTML = "💐 Chúc bạn 20/10 vui vẻ, luôn xinh đẹp, hạnh phúc và được tặng thật nhiều quà nhé! 💖";
-
-    // Hiệu ứng tim bay
-    for (let i = 0; i < 30; i++) {
-      createHeart();
-    }
+    message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
+    document.getElementById('buttons').style.display = 'none';
   });
-
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '💗';
-    document.body.appendChild(heart);
-
-    const x = Math.random() * window.innerWidth;
-    const size = Math.random() * 20 + 10;
-    heart.style.left = `${x}px`;
-    heart.style.fontSize = `${size}px`;
-
-    setTimeout(() => {
-      heart.remove();
-    }, 3000);
-  }
-
-  // Cho tim bay ngẫu nhiên khi vào trang
-  setInterval(createHeart, 800);
 </script>
 
 </body>
 </html>
+
 
 

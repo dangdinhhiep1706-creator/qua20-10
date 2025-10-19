@@ -52,6 +52,20 @@ Quà 20-10 của Đặng Đình Hiệp
     color: #d63384;
     font-weight: bold;
   }
+
+  /* Hiệu ứng hoa rơi */
+  .flower {
+    position: fixed;
+    top: -50px;
+    color: pink;
+    font-size: 24px;
+    animation: fall 5s linear infinite;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  }
 </style>
 </head>
 <body>
@@ -64,28 +78,67 @@ Quà 20-10 của Đặng Đình Hiệp
 
 <div id="message"></div>
 
+<!-- Nhạc nền -->
+<audio id="bgMusic" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/03/21/audio_6c412d7763.mp3?filename=happy-day-143718.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Âm thanh khi di chuột -->
+<audio id="hoverSound">
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5e2580cf56.mp3?filename=pop-94319.mp3" type="audio/mpeg">
+</audio>
+
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
+  const hoverSound = document.getElementById('hoverSound');
+  const bgMusic = document.getElementById('bgMusic');
 
-  // Vị trí ban đầu của nút "Có"
+  // Cho nhạc nền phát khi click trang
+  document.body.addEventListener('click', () => {
+    bgMusic.play();
+  }, { once: true });
+
+  // Đặt vị trí ban đầu
   yesBtn.style.left = "45%";
   yesBtn.style.top = "0px";
 
-  // Khi rê chuột vào nút "Có" -> nhảy chỗ khác
+  // Khi rê chuột vào nút "Có"
   yesBtn.addEventListener('mouseover', () => {
-    const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight - 100);
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+
+    // Giới hạn trong màn hình, không cho nút bay ra ngoài
+    const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
     yesBtn.style.left = `${x}px`;
     yesBtn.style.top = `${y}px`;
   });
 
-  // Khi bấm nút "Không" -> hiện lời chúc
+  // Khi bấm "Không" => hiện lời chúc + hiệu ứng hoa rơi
   noBtn.addEventListener('click', () => {
     message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
     document.getElementById('buttons').style.display = 'none';
+    createFlowers();
   });
+
+  // Tạo hiệu ứng hoa rơi
+  function createFlowers() {
+    const flowers = ['🌸', '🌷', '🌹', '🌺', '💮'];
+    setInterval(() => {
+      const flower = document.createElement('div');
+      flower.classList.add('flower');
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * 100 + 'vw';
+      flower.style.fontSize = Math.random() * 20 + 20 + 'px';
+      flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }, 300);
+  }
 </script>
 
 </body>

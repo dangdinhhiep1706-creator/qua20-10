@@ -21,9 +21,10 @@
     margin-top: 30px;
     position: relative;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 30px;
+    flex-wrap: wrap;
   }
   button {
     font-size: 20px;
@@ -36,10 +37,11 @@
   #yes {
     background-color: #ff66b2;
     color: white;
-    position: absolute;
+    position: absolute; /* cho phép di chuyển */
   }
   #no {
     background-color: #ffcccb;
+    position: relative;
   }
   #message {
     margin-top: 40px;
@@ -49,14 +51,15 @@
     padding: 0 10px;
   }
 
-  /* Đảm bảo responsive */
+  /* Responsive cho điện thoại */
   @media (max-width: 600px) {
     button {
       font-size: 18px;
       padding: 10px 20px;
     }
     #buttons {
-      gap: 15px;
+      flex-direction: column;
+      gap: 25px;
     }
   }
 </style>
@@ -64,6 +67,7 @@
 <body>
 
 <h1>Bạn có muốn nhận quà 20/10 không? 💝</h1>
+
 <div id="buttons">
   <button id="yes">Có 💕</button>
   <button id="no">Không 😆</button>
@@ -75,21 +79,26 @@
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
+  const buttons = document.getElementById('buttons');
 
-  // Cập nhật vị trí khi rê hoặc chạm
+  // Lấy kích thước cửa sổ để nút không ra ngoài
   function moveYesBtn() {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 120);
+    const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
+    const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
     yesBtn.style.left = x + 'px';
     yesBtn.style.top = y + 'px';
   }
 
+  // Khi rê chuột hoặc chạm vào nút "Có", nó chạy đi
   yesBtn.addEventListener('mouseover', moveYesBtn);
   yesBtn.addEventListener('touchstart', moveYesBtn);
 
+  // Khi bấm vào "Không", hiện lời chúc
   noBtn.addEventListener('click', () => {
     message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
-    document.getElementById('buttons').style.display = 'none';
+    buttons.style.display = 'none';
   });
 </script>
 

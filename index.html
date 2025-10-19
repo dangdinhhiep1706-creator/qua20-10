@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quà 20/10 của Đình Hiệp</title>
 <style>
   body {
@@ -9,17 +10,24 @@
     background-color: #ffe4ec;
     text-align: center;
     padding-top: 100px;
+    margin: 0;
+    overflow: hidden;
   }
   h1 {
     color: #d63384;
+    padding: 0 15px;
   }
   #buttons {
     margin-top: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }
   button {
     font-size: 20px;
-    padding: 10px 20px;
-    margin: 20px;
+    padding: 12px 25px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -38,6 +46,18 @@
     font-size: 22px;
     color: #d63384;
     font-weight: bold;
+    padding: 0 10px;
+  }
+
+  /* Đảm bảo responsive */
+  @media (max-width: 600px) {
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+    #buttons {
+      gap: 15px;
+    }
   }
 </style>
 </head>
@@ -56,15 +76,17 @@
   const noBtn = document.getElementById('no');
   const message = document.getElementById('message');
 
-  // Khi rê chuột vào nút "Có", nó chạy chỗ khác
-  yesBtn.addEventListener('mouseover', () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+  // Cập nhật vị trí khi rê hoặc chạm
+  function moveYesBtn() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
     yesBtn.style.left = x + 'px';
     yesBtn.style.top = y + 'px';
-  });
+  }
 
-  // Khi bấm nút "Không"
+  yesBtn.addEventListener('mouseover', moveYesBtn);
+  yesBtn.addEventListener('touchstart', moveYesBtn);
+
   noBtn.addEventListener('click', () => {
     message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
     document.getElementById('buttons').style.display = 'none';
@@ -73,6 +95,3 @@
 
 </body>
 </html>
-
-
-

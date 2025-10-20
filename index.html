@@ -16,21 +16,21 @@
 
   h1 {
     color: #d63384;
-    padding: 0 10px;
+    padding: 0 15px;
   }
 
   #buttons {
-    margin-top: 30px;
+    margin-top: 50px;
     position: relative;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 40px;
+    justify-content: space-between; /* tách 2 nút ra xa nhau */
+    padding: 0 50px;
+    box-sizing: border-box;
   }
 
   button {
-    font-size: 20px;
+    font-size: 22px;
     padding: 12px 25px;
     border: none;
     border-radius: 10px;
@@ -41,36 +41,42 @@
   #yes {
     background-color: #ff66b2;
     color: white;
-    position: absolute; /* cho phép chạy lung tung */
+    position: absolute; /* để nó chạy được */
+    left: 20%;
   }
 
   #no {
     background-color: #ffcccb;
+    position: relative;
+    right: 20%;
   }
 
   #message {
-    margin-top: 40px;
+    margin-top: 60px;
     font-size: 22px;
     color: #d63384;
     font-weight: bold;
     padding: 0 15px;
   }
 
-  /* Responsive cho màn hình nhỏ */
+  /* Responsive cho điện thoại */
   @media (max-width: 600px) {
-    body {
-      padding-top: 80px;
-    }
-    h1 {
-      font-size: 20px;
-    }
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-    }
     #buttons {
       flex-direction: column;
-      gap: 25px;
+      align-items: center;
+      justify-content: center;
+      gap: 70px; /* tăng khoảng cách giữa 2 nút */
+      padding: 0;
+    }
+
+    #yes, #no {
+      position: relative; /* cố định khi ban đầu để tách xa nhau */
+      left: auto;
+      right: auto;
+    }
+
+    #yes {
+      top: 0;
     }
   }
 </style>
@@ -92,7 +98,7 @@
   const message = document.getElementById('message');
   const buttons = document.getElementById('buttons');
 
-  // Hàm di chuyển nút "Có" ngẫu nhiên trong màn hình
+  // Hàm di chuyển nút "Có" ngẫu nhiên
   function moveYesBtn() {
     const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
     const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
@@ -115,5 +121,4 @@
 
 </body>
 </html>
-
 

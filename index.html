@@ -13,19 +13,22 @@
     margin: 0;
     overflow: hidden;
   }
+
   h1 {
     color: #d63384;
-    padding: 0 15px;
+    padding: 0 10px;
   }
+
   #buttons {
     margin-top: 30px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
     flex-wrap: wrap;
+    gap: 40px;
   }
+
   button {
     font-size: 20px;
     padding: 12px 25px;
@@ -34,25 +37,33 @@
     cursor: pointer;
     transition: 0.3s;
   }
+
   #yes {
     background-color: #ff66b2;
     color: white;
-    position: absolute; /* cho phép di chuyển */
+    position: absolute; /* cho phép chạy lung tung */
   }
+
   #no {
     background-color: #ffcccb;
-    position: relative;
   }
+
   #message {
     margin-top: 40px;
     font-size: 22px;
     color: #d63384;
     font-weight: bold;
-    padding: 0 10px;
+    padding: 0 15px;
   }
 
-  /* Responsive cho điện thoại */
+  /* Responsive cho màn hình nhỏ */
   @media (max-width: 600px) {
+    body {
+      padding-top: 80px;
+    }
+    h1 {
+      font-size: 20px;
+    }
     button {
       font-size: 18px;
       padding: 10px 20px;
@@ -81,7 +92,7 @@
   const message = document.getElementById('message');
   const buttons = document.getElementById('buttons');
 
-  // Lấy kích thước cửa sổ để nút không ra ngoài
+  // Hàm di chuyển nút "Có" ngẫu nhiên trong màn hình
   function moveYesBtn() {
     const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
     const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
@@ -91,11 +102,11 @@
     yesBtn.style.top = y + 'px';
   }
 
-  // Khi rê chuột hoặc chạm vào nút "Có", nó chạy đi
+  // Khi rê chuột (máy tính) hoặc chạm (điện thoại) vào nút "Có"
   yesBtn.addEventListener('mouseover', moveYesBtn);
   yesBtn.addEventListener('touchstart', moveYesBtn);
 
-  // Khi bấm vào "Không", hiện lời chúc
+  // Khi bấm "Không" => hiện lời chúc
   noBtn.addEventListener('click', () => {
     message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
     buttons.style.display = 'none';
@@ -104,3 +115,5 @@
 
 </body>
 </html>
+
+

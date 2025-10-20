@@ -10,115 +10,78 @@
     background-color: #ffe4ec;
     text-align: center;
     padding-top: 100px;
-    margin: 0;
     overflow: hidden;
   }
-
   h1 {
     color: #d63384;
-    padding: 0 15px;
   }
-
   #buttons {
-    margin-top: 50px;
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* tách 2 nút ra xa nhau */
-    padding: 0 50px;
-    box-sizing: border-box;
+    margin-top: 30px;
   }
-
   button {
     font-size: 22px;
-    padding: 12px 25px;
+    padding: 10px 25px;
+    margin: 30px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
   }
-
   #yes {
-    background-color: #ff66b2;
+    background-color: #ff69b4;
     color: white;
-    position: absolute; /* để nó chạy được */
-    left: 20%;
+    position: absolute;
   }
-
   #no {
-    background-color: #ffcccb;
-    position: relative;
-    right: 20%;
+    background-color: #ffb6c1;
+    color: white;
   }
-
   #message {
-    margin-top: 60px;
-    font-size: 22px;
+    margin-top: 40px;
+    font-size: 26px;
     color: #d63384;
-    font-weight: bold;
-    padding: 0 15px;
-  }
-
-  /* Responsive cho điện thoại */
-  @media (max-width: 600px) {
-    #buttons {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 70px; /* tăng khoảng cách giữa 2 nút */
-      padding: 0;
-    }
-
-    #yes, #no {
-      position: relative; /* cố định khi ban đầu để tách xa nhau */
-      left: auto;
-      right: auto;
-    }
-
-    #yes {
-      top: 0;
-    }
+    display: none;
   }
 </style>
 </head>
 <body>
 
-<h1>Bạn có muốn nhận quà 20/10 không? 💝</h1>
+<h1>Bạn có muốn nhận quà 20/10 của mình không? 💝</h1>
 
 <div id="buttons">
-  <button id="yes">Có 💕</button>
-  <button id="no">Không 😆</button>
+  <button id="yes">Có 💖</button>
+  <button id="no">Không 😜</button>
 </div>
 
-<div id="message"></div>
+<p id="message">Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn được yêu thương hehe 💐💗</p>
 
 <script>
   const yesBtn = document.getElementById('yes');
   const noBtn = document.getElementById('no');
-  const message = document.getElementById('message');
-  const buttons = document.getElementById('buttons');
+  const msg = document.getElementById('message');
 
-  // Hàm di chuyển nút "Có" ngẫu nhiên
-  function moveYesBtn() {
-    const maxX = window.innerWidth - yesBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - yesBtn.offsetHeight - 20;
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-    yesBtn.style.left = x + 'px';
-    yesBtn.style.top = y + 'px';
+  // Khi nhấn "Không" => hiện câu chúc
+  noBtn.addEventListener('click', () => {
+    msg.style.display = 'block';
+  });
+
+  // Khi chạm hoặc di vào "Có" => nó chạy sang vị trí khác (trong màn hình)
+  function moveButton() {
+    const screenWidth = window.innerWidth - yesBtn.offsetWidth - 20;
+    const screenHeight = window.innerHeight - yesBtn.offsetHeight - 20;
+
+    const randomX = Math.max(10, Math.random() * screenWidth);
+    const randomY = Math.max(10, Math.random() * screenHeight);
+
+    yesBtn.style.left = `${randomX}px`;
+    yesBtn.style.top = `${randomY}px`;
   }
 
-  // Khi rê chuột (máy tính) hoặc chạm (điện thoại) vào nút "Có"
-  yesBtn.addEventListener('mouseover', moveYesBtn);
-  yesBtn.addEventListener('touchstart', moveYesBtn);
-
-  // Khi bấm "Không" => hiện lời chúc
-  noBtn.addEventListener('click', () => {
-    message.innerHTML = "💐 Chúc bạn 20/10 thật xinh đẹp, hạnh phúc và luôn cười tươi như hoa nhé! 💖";
-    buttons.style.display = 'none';
-  });
+  yesBtn.addEventListener('mouseenter', moveButton); // cho máy tính
+  yesBtn.addEventListener('touchstart', moveButton); // cho điện thoại
 </script>
 
 </body>
 </html>
+
 
